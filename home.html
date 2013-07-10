@@ -1,0 +1,29 @@
+<head>
+  <title>Velocity Webworks Foosball Scoreboard</title>
+</head>
+
+<body>
+  {{> header}}
+  {{> container}}
+ </body>
+ 
+<template name="header">
+  <h1>Velocity Webworks Foosball</h1>
+  {{greeting}}
+</template>
+<template name="container">
+  <div class="container">
+	<div class="row">
+		{{#if loggedin}}
+		<div class="span3">
+			{{> scoreboard}}
+		</div>
+		<div class="span9">
+			{{> gamehistory}}
+		</div>
+		{{else}}
+		<div class="span12">Login First</div>
+		{{/if}}
+	</div>
+  </div>
+</template>
