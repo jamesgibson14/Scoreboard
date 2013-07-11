@@ -1,8 +1,8 @@
+Players = new Meteor.Collection("players");
+Games = new Meteor.Collection("games");
+
 if (Meteor.isClient) {
   Template.container.loggedin = true;
-  Template.header.greeting = function () {
-    return "Welcome to scoreboard.";
-  };
 
   Template.header.events({
     'click input' : function () {
@@ -10,16 +10,30 @@ if (Meteor.isClient) {
       alert("You pressed the button");
     }
   });
-  Template.gamehistory.rendered = function(){
-  	$("#nameselect").typeahead({
-  		source: ['James','Dan','Rick']
-  	})
-  }
 }
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
-    // code to run on server at startup
+  	
+  	if (Players.find().count() === 0) {
+      var names = ["James G",
+                   "Dan P",
+                   "Adam T",
+                   "Nikki Y",
+                   "Patrick M",
+                   "Brian O"];
+      for (var i = 0; i < names.length; i++)
+        Players.insert({name: names[i], score: 0});      
+    }
+    if (Games.find().count() === 0) {
+      var games = [{p1:'James',p2: 'Dan',p1score:8,p2score: 10},
+      				{p1:'James',p2: 'Dan',p1score:7,p2score: 10},
+      				{p1:'James',p2: 'Dan',p1score:10,p2score: 5},
+      				{p1:'James',p2: 'Dan',p1score:10,p2score: 9}];
+      for (var i = 0; i < games.length; i++)
+        Games.insert(games[i]);
+      
+    }
     console.log('We are up and running!')
   });
 }

@@ -2,7 +2,7 @@
 <template name="player">
   <div class="player {{selected}}">
     <span class="name">{{name}}</span>
-    <span class="score">{{score}}</span>
+    <span class="score pull-right">{{score}}</span>
   </div>
 </template>
 
@@ -13,24 +13,6 @@
       {{> player}}
     {{/each}}
   </div>
-	<ul>
-		<li class="player"><span class="name">Bob:</span><span class="score">350</span></li>
-		<li><span>Jane:</span><span>200</span></li>
-		<li><span>Bob:</span><span>350</span></li>
-		<li><span>Jane:</span><span>200</span></li>
-		<li><span>Bob:</span><span>350</span></li>
-		<li><span>Jane:</span><span>200</span></li>
-		<li><span>Bob:</span><span>350</span></li>
-		<li><span>Jane:</span><span>200</span></li>
-	</ul>
-  {{#if selected_name}}
-  <div class="details">
-    <div class="name">{{selected_name}}</div>
-    <input type="button" class="inc" value="Give 5 points" />
-  </div>
-  {{/if}}
+  <div class="none">Click a player to see history</div>
 
-  {{#unless selected_name}}
-  <div class="none">Click a player to select</div>
-  {{/unless}}
 </template>

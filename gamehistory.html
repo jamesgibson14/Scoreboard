@@ -1,56 +1,32 @@
 <template name="gamehistory">
-  <label>New Game</label>
-  <div class="form-inline">
-  <input id="nameselect" type="text" class="" autocomplete="off" placeholder="Player 1" />
-  <label> Goals</label><input type="text" class="span1" />
-  </div>
+	{{> game}}
   <h2>Game History</h2>
-  <div class="scoreboard">
+  <div>
     {{#each games}}
       {{> gameline}}
     {{/each}}
   </div>
-	
-  {{#if selected_name}}
-  <div class="details">
-    <div class="name">{{selected_name}}</div>
-    <input type="button" class="inc" value="Give 5 points" />
+</template>
+<template name="game">
+  {{#if newGame}}
+  <h3>New Game</h3>
+  <div class="form-inline">
+  		Choose Players
+	  <input class="nameselect" type="text" data-attr="p1" autocomplete="off" placeholder="Player 1" />
+	  vs
+	  <input class="nameselect" type="text" data-attr="p2" autocomplete="off" placeholder="Player 2" />
+	  <button type="button" class="btn btn-primary">Start Game</button>
   </div>
+  {{else}}
+  <h3>Live Game</h3>
+  	<div class="inline">
+  		<span>{{p1}}</span><button class="btn btn-primary inc" data-attr="p1score">+Goal</button><br />
+  		<span>{{p1}}</span><button class="btn btn-primary inc" data-attr="p1score">+Goal</button>
+    </div>
   {{/if}}
-
-  {{#unless selected_name}}
-  <div class="none">Click a game to edit</div>
-  {{/unless}}
 </template>
 <template name="gameline">
-  <li class="game {{done_class}}">
-    {{#if editing}}
-      <div class="edit">
-        <input id="todo-input" type="text" value="{{text}}" />
-      </div>
-    {{else}}
-      <div class="destroy"></div>
-      <div class="display">
-        <input class="check" name="markdone" type="checkbox" {{{done_checkbox}}} />
-        <div class="todo-text">{{text}}</div>
-      </div>
-    {{/if}}
-    <div class="item-tags">
-      {{#each tag_objs}}
-        <div class="tag removable_tag">
-          <div class="name">{{tag}}</div>
-          <div class="remove"></div>
-        </div>
-      {{/each}}
-      {{#if adding_tag}}
-        <div class="tag edittag">
-          <input type="text" id="edittag-input" value="" />
-        </div>
-      {{else}}
-        <div class="tag addtag">
-          +tag
-        </div>
-      {{/if}}
-    </div>
-  </li>
+	<div>
+		<span>{{p1}} ({{p1score}}) </span>vs<span> {{p2}} ({{p2score}})</span>
+	</div>
 </template>
