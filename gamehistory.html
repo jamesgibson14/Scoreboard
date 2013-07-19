@@ -8,25 +8,30 @@
   </div>
 </template>
 <template name="game">
-  {{#if newGame}}
-  <h3>New Game</h3>
+  {{#if getGame}}
+  {{#if loading}}
+    <div id="lists">Loading...</div>
+  {{else}}
+  <h3>Game In Process</h3>
+  	<div class="inline">
+  	<span> {{p1}} ({{p1score}}) </span><button class="btn btn-primary inc" data-attr="p1score">+Goal</button><br />
+  	<span> {{p2}} ({{p2score}}) if </span><button class="btn btn-primary inc" data-attr="p2score">+Goal</button>
+    </div>
+ 
+  {{/if}}
+  {{else}}
+   <h3>New Game</h3>
   <div class="form-inline">
   		Choose Players
 	  <input class="nameselect" type="text" data-attr="p1" autocomplete="off" placeholder="Player 1" />
 	  vs
 	  <input class="nameselect" type="text" data-attr="p2" autocomplete="off" placeholder="Player 2" />
-	  <button type="button" class="btn btn-primary">Start Game</button>
+	  <button type="button" class="btn btn-primary" id="startGame">Start Game</button>
   </div>
-  {{else}}
-  <h3>Live Game</h3>
-  	<div class="inline">
-  		<span>{{p1}}</span><button class="btn btn-primary inc" data-attr="p1score">+Goal</button><br />
-  		<span>{{p1}}</span><button class="btn btn-primary inc" data-attr="p1score">+Goal</button>
-    </div>
   {{/if}}
 </template>
 <template name="gameline">
-	<div>
-		<span>{{p1}} ({{p1score}}) </span>vs<span> {{p2}} ({{p2score}})</span>
-	</div>
+    <div id="{{_id}}" class="gameline">
+      <span>{{p1}} ({{p1score}}) </span>vs<span> {{p2}} ({{p2score}}) {{#if gameEnded}} {{calculateTime}}end {{else}} Clock {{/if}} </span>
+    </div>
 </template>
